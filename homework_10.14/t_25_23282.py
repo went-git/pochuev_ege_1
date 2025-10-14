@@ -4,24 +4,26 @@ def find_pros(num):
             return 2
     return num
 
-def sm(num):
+def is_ans(n):
+    mx = 0
+    mn = 10**10
     for i in pros:
-        if num%i == 0 and num//i in pros:
-            return num//i + i
-    return 0
-
+        if n%i == 0:
+            mx = max(i, mx)
+            mn = min(i,mn)
+    return mn+mx
 
 n = 5400000+1
-c = 0
 pros = set()
 pros.add(2)
 pros.add(3)
-for i in range(5, n, 2):
+for i in range(5, n//2, 2):
     pros.add(find_pros(i))
 
+c = 0
 while c<5:
-    k = sm(n)
-    if k > 60000  and str(k) == str(k)[::-1]:
+    k = is_ans(n)
+    if k > 60_000 and str(k) == str(k)[::-1]:
         print(n, k)
         c += 1
     n += 1
